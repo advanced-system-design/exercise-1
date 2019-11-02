@@ -66,10 +66,10 @@ def test_timestamp(data_dir):
 def test_thought(data_dir):
     _upload_thought(_USER_1, _TIMESTAMP_1, _THOUGHT_1)
     thought_path = _get_path(data_dir, _USER_1, _TIMESTAMP_1)
-    assert thought_path.read_text() == _THOUGHT_1
+    assert thought_path.read_text() .rstrip() == _THOUGHT_1
     _upload_thought(_USER_2, _TIMESTAMP_2, _THOUGHT_2)
     thought_path = _get_path(data_dir, _USER_2, _TIMESTAMP_2)
-    assert thought_path.read_text() == _THOUGHT_2
+    assert thought_path.read_text().rstrip() == _THOUGHT_2
 
 
 def test_partial_data(data_dir):
@@ -80,7 +80,7 @@ def test_partial_data(data_dir):
             connection.sendall(bytes([c]))
             time.sleep(0.01)
     thought_path = _get_path(data_dir, _USER_1, _TIMESTAMP_1)
-    assert thought_path.read_text() == _THOUGHT_1
+    assert thought_path.read_text().rstrip() == _THOUGHT_1
 
 
 def test_race_condition(data_dir):
